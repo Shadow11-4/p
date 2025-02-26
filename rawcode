@@ -1,0 +1,53 @@
+var names = getColumn("Best Selling Video Games", "Title");
+
+onEvent("StartButtonMost","click",function(){
+  setScreen("MostScreen");
+});
+
+onEvent("StartButtonLeast","click",function(){
+  setScreen("LeastScreen");
+});
+
+onEvent("PickGame","change", function(){
+  FindMostSales();
+});
+
+function FindMostSales(){
+  var input = getText("PickGame");
+  var catagory = getColumn("Best Selling Video Games",input);
+  var max = 0;
+  var MostSales;
+  for(var c = 0; c < catagory.length; c++){
+    if(catagory[c] > max){
+      max = catagory[c];
+      MostSales = names[c];
+    }
+  }
+  setText("TextMost", "The game with the most " + input + " is " + MostSales);
+}
+
+onEvent("LeastDown", "change", function(){
+  FindLeastSales();
+});
+
+  function FindLeastSales(){
+  var input = getText("LeastDown");
+  var catagory = getColumn("Best Selling Video Games", input);
+  var least = 200000000;
+  var LeastSales;
+  for(var c = 0; c < catagory.length; c++){
+    if(catagory[c] < least){
+      least = catagory[c];
+      LeastSales = names[c];
+    }
+  }
+  setText("LeastOutput","The game with the least " + input + " is " + LeastSales);
+  }
+
+onEvent("BackButton","click",function(){
+  setScreen("StartScreen");
+});
+
+onEvent("BackButton2","click",function(){
+  setScreen("StartScreen");
+});
